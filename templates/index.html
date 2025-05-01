@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Depbots</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #e0e0ff, #f0ffe0);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 10px;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+    }
+    
+    .card-container {
+      max-width: 550px;
+      width: 100%;
+      padding: 30px;
+      border-radius: 16px;
+      background-color: white;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+    
+    .logo {
+      width: 40px;
+      height: 40px;
+      background-color: #e7e3ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+    }
+    
+    .peace-icon {
+      color: #8c7ae6;
+      font-size: 20px;
+    }
+    
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #222;
+      margin: 0;
+    }
+    
+    .heart-icon {
+      color: #7bed9f;
+      font-size: 24px;
+      margin-left: 10px;
+    }
+    
+    .description {
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      color: #555;
+    }
+    
+    .input-container {
+      position: relative;
+      margin-bottom: 15px;
+      display: flex;
+    }
+    
+    .tweet-input {
+      flex-grow: 1;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+    
+    .tweet-input:focus {
+      outline: none;
+      border-color: #8c7ae6;
+    }
+    
+    .analyze-button {
+      background-color: #c5b8ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .analyze-button:hover {
+        background-color: #a697e8; /* Darker shade when hovering */
+      }
+    
+    .example-text {
+      color: #777;
+      font-size: 14px;
+      margin: 10px 0;
+    }
+    
+    .examples-section {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 15px;
+    }
+    
+    .examples-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .example-item {
+      background-color: #fff;
+      border-radius: 6px;
+      padding: 8px 12px;
+      border: 1px solid #e8e8e8;
+    }
+    
+    .example-button {
+      background: none;
+      border: none;
+      color: #555;
+      width: 100%;
+      padding: 0;
+      font-size: 14px;
+      text-align: left;
+      cursor: pointer;
+    }
+    
+    .disclaimer {
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+      margin-top: 40px;
+    }
+    
+    .result-container {
+      background-color: #f9f7ff;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 25px 0;
+      box-shadow: 0 2px 10px rgba(140, 122, 230, 0.1);
+      border-left: 4px solid #8c7ae6;
+    }
+    
+    .result-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .result-icon {
+      font-size: 20px;
+      margin-right: 10px;
+      color: #8c7ae6;
+    }
+    
+    .result-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #555;
+    }
+    
+    .result-content {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <div class="header">
+      <div class="logo">
+        <span class="peace-icon">☮</span>
+      </div>
+      <h1 class="title">Depbot Detect</h1>
+      <span class="heart-icon">♡</span>
+    </div>
+    
+    <p class="description">
+      Instantly analyze tweet text for signs of depression<br>
+      using AI. Paste a tweet—or try an example!
+    </p>
+    
+    <form action="/predict" method="post">
+      <div class="input-container">
+        <input 
+          class="tweet-input" 
+          type="text" 
+          name="tweet" 
+          placeholder="Paste tweet text here..." 
+          required
+          value="{{ tweet_text or '' }}"
+        >
+        <button type="submit" class="analyze-button">Analyze</button>
+      </div>
+      
+      <div class="examples-section">
+        <p class="example-text">Try an example:</p>
+        <div class="examples-container">
+          <div class="example-item">
+            <button type="button" class="example-button" onclick="fillExample(this.textContent)">
+              "I haven't felt motivated to ..."
+            </button>
+          </div>
+          <div class="example-item">
+            <button type="button" class="example-button" onclick="fillExample(this.textContent)">
+              "What a wonderful day, I feel..."
+            </button>
+          </div>
+          <div class="example-item">
+            <button type="button" class="example-button" onclick="fillExample(this.textContent)">
+              "Feeling hopeless and lost."
+            </button>
+          </div>
+          <div class="example-item">
+            <button type="button" class="example-button" onclick="fillExample(this.textContent)">
+              "Excited about my new job and..."
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+    
+    {% if prediction_text %}
+    <div class="result-container">
+      <div class="result-header">
+        <span class="result-icon">📊</span>
+        <h3 class="result-title">Analysis Result</h3>
+      </div>
+      <div class="result-content">
+        {{ prediction_text }}
+      </div>
+    </div>
+    {% endif %}
+    
+    <p class="disclaimer">
+      This tool does not provide clinical diagnoses or medical advice. For mental health support, consider 
+      contacting a professional.
+    </p>
+  </div>
+
+  <script>
+    function fillExample(text) {
+      document.querySelector('.tweet-input').value = text;
+    }
+  </script>
+</body>
+</html>
