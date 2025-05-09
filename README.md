@@ -1,4 +1,50 @@
-# Detecting Depression By Tweets
-In the 21st century, mental illness has surged, leading to the development of various methods for treatment. The primary challenge remains accurately detecting whether an individual is truly suffering from a mental health condition. Leveraging technology to address this issue can significantly enhance the diagnosis and management of mental illnesses like depression. AI and machine learning algorithms can analyse patterns in speech, text, and behaviour to identify signs of depression and other mental health issues. These technologies can process large datasets, identifying subtle indicators that might be missed by human observation.
-Hence, Me along with Ms.Paridhi Gusain under the team name of Depbots are presenting you a depression detecting bot which detects depression on the basis of a person's tweet. we have used the 'sentiment 140' dataset available on kaggle and can be accessed by this link (https://www.kaggle.com/datasets/kazanova/sentiment140?resource=download&select=training.1600000.processed.noemoticon.csv).
-We have used nltk library present in python in order to preprocess the data and with the usage of machine learning algorithms. after making own word2vec model using text. Further, Optuna was used for the hyper-parameter tuning of the ML algorithms. We have also used RNN(recurrent neural networks) and deep learning techniques. This NLP model helps us to define whether a tweet has a feeling of depression or not. 
+# Depbots - Depression Detection using Tweets
+
+## Project Description
+
+Depbots is a machine learning model that classifies whether a person is experiencing depressive feelings based on their tweets. The project leverages both traditional machine learning and deep learning techniques for sentiment analysis to detect depressive emotions in social media content.
+
+Key features of the project:
+
+- Deployed an ML-based sentiment analysis model optimized using Optuna for hyperparameter tuning
+- Engineered a custom Word2Vec embedding model trained on the Sentiment140 dataset (1.6 million tweets)
+- Implemented extensive text preprocessing to improve feature representation and classification accuracy
+- Combines both traditional machine learning and deep learning approaches
+
+## Technical Details
+
+### Implementation
+- Built using Python with machine learning libraries like scikit-learn
+- Utilizes NLP techniques and Word2Vec for text representation
+- Hyperparameter tuning performed with Optuna
+- Trained on large-scale tweet data (Sentiment140 dataset)
+
+### Features
+- Text preprocessing pipeline for tweet data
+- Custom word embeddings trained specifically for sentiment analysis
+- Multiple model architectures evaluated
+- Optimized performance through systematic hyperparameter tuning
+
+## Usage
+
+The model can be used to analyze tweets or other short text content for signs of depressive sentiment. This could be valuable for mental health applications, social media monitoring, or psychological research.
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies: `pip install -r requirements.txt`
+3. Run the Jupyter notebooks to explore the model development process
+
+## Future Work
+
+Potential enhancements include:
+- Expanding to other social media platforms
+- Incorporating more recent deep learning architectures
+- Developing a real-time monitoring application
+- Improving model interpretability
+
+## Acknowledgments
+
+- Sentiment140 dataset
+- Various Python NLP and ML libraries
+- Research papers on depression detection in social media
